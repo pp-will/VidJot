@@ -1,0 +1,25 @@
+//model for Mongodb
+const mongoose = require('mongoose');
+const schema = mongoose.Schema;
+
+//Create Schema
+const UserSchema = new schema({
+  name: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true
+  },
+  password: {
+    type: String,
+    rquired: true
+  },
+  date: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+mongoose.model('users', UserSchema);
