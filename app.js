@@ -16,11 +16,14 @@ const users = require('./routes/users');
 //Passport config
 require('./config/passport')(passport);
 
+//DB CONFIG
+const db = require('./config/database');
+
 //connect to mongoose
 //*local connection
 //use promise to connect and catch an err
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/vidjot-dev')
+mongoose.connect(db.mongoURI)
 .then(() => console.log('MongoDB connected...'))
 .catch(err => console.log(err));
 
@@ -72,7 +75,7 @@ app.use(function(req, res, next) {
   next();
 })
 
-const port = 5000;
+const port = process.env.PORT || 5000; //add process.env.PORT for heroku 
 
 /*middleware HOW IT WORKS
 app.use(function(req, res, next) {
